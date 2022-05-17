@@ -1,0 +1,23 @@
+#content {
+    width: 300px;
+    margin: auto;
+    text-align: center;
+}
+label#search-caption {
+    font-style: italic;
+    font-size: .875em;
+    color: grey;
+}
+.hidden {
+    display: none;
+    visibility: hidden;
+}
+input { 
+    margin-top: 2px;
+}
+input[id="state"] {
+    margin-bottom: 10px;
+}
+input[type="submit"] {
+    margin-top: 10px;
+}
