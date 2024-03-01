@@ -144,13 +144,25 @@ For example, to locate BLS data for `Marin County, CA`.
 
 ```sql
 SELECT * 
-FROM `hs-research-tumgoren.bls.unemployment`
-WHERE `county` = 'Marin County'
- AND `state` = 'CA'
+FROM hs-research-tumgoren.bls.unemployment
+WHERE county = 'Marin County'
+ AND state = 'CA'
 ;
 ```
 
-Other SQL queries for tinkering:
+This query pulls all the fields in our table. But we know that our data visualization only requires the unemployment rate. We'll know the county and state the user queried when she submits the web form, so technically we don't  need those fields. But let's select those as well to simplify some things downstream.
+
+Here's the updated query.
+
+```sql
+SELECT state, county, unemployed_rate 
+FROM hs-research-tumgoren.bls.unemployment
+WHERE county = 'Marin County'
+ AND state = 'CA'
+;
+```
+
+If you feel like tinkering with BigQuery a bit more, here are some analysis-oriented questions you can try answering by writing SQL:
 
 * Counties with highest and lowest unemployment rates?
 * Largest counties with highest/lowest unemployment?
