@@ -6,9 +6,9 @@ The end goal is to allow a Cloud Function to query for the unemployment data for
 
 Data storage and querying is a big subject, and there are myriad ways to store and query data in the cloud. 
 
-Sites/services often use relational databases such as Postgres or key-value stores such as Firebase to store data used by APIs and web applications.
+Sites/services often use relational databases such as [PostgreSQL](https://www.postgresql.org/) or [key-value stores](https://en.wikipedia.org/wiki/Key%E2%80%93value_database) such as Google's [Cloud Firestore](https://firebase.google.com/docs/firestore) to store data used by APIs and web applications.
 
-These all pose some level of technical difficulty with respect to setup and usage. 
+These tools provide useful features for varying circumstances, but also pose technical challenges with respect to setup and usage.
 
 [BigQuery](https://cloud.google.com/bigquery/docs) is a simple option for storing and querying data on the Google Cloud Platform. 
 
@@ -20,11 +20,11 @@ Let's grab some data from the Bureau of Labor Statistics (BLS) that we can load 
 
 The BLS provides data on inflation, prices of goods and services, productivity and much more. They provide this data at varying aggregations such as nationwide and state levels.
 
-For this tutorial, we're interested in the recent unemployment rate by county. BLS offers a "rolling" data set for the last 14-months on its [Local Area Unemployment Statistics](https://www.bls.gov/lau/tables.htm).
+For this tutorial, we're interested in the recent unemployment rate by county. BLS offers a "rolling" data set for the last 14-months on its page for [Local Area Unemployment Statistics](https://www.bls.gov/lau/tables.htm).
 
 We're specifically interested in the file under the `County` section called [Labor force data by county, not seasonally adjusted, latest 14 months](https://www.bls.gov/web/metro/laucntycur14.txt).
 
-Navigate to that page. You'll notice that the data is in a rather unfriendly format, at least for use in a spreadsheet or similar tool.
+You'll notice that the data is in a rather unfriendly format, at least for use in a spreadsheet or similar tool.
 
 Never fear, we'll handle that in the next step.
 
@@ -36,7 +36,7 @@ As mentioned, the BLS 14-month county data is not structured in ideal format for
 
 Now that you've downloaded the data, you can use the [clean_bls_unemployment_data.py](../scripts/clean_bls_unemployment_data.py) script to generate a standardized CSV.
 
-Download the script to the same location where you saved the `laucntycur14.txt` file from BLS. 
+Download the script to the same folder where you saved the `laucntycur14.txt` file from BLS. 
 
 Then open a Terminal shell, navigate to the folder where the script and data are located, run the script:
 
@@ -155,7 +155,7 @@ This query pulls all the fields in our table. But we know that our data visualiz
 Here's the updated query.
 
 ```sql
-SELECT state, county, unemployed_rate 
+SELECT state, county, unemployed_rate
 FROM hs-research-tumgoren.bls.unemployment
 WHERE county = 'Marin County'
  AND state = 'CA'
@@ -167,3 +167,4 @@ If you feel like tinkering with BigQuery a bit more, here are some analysis-orie
 * Counties with highest and lowest unemployment rates?
 * Largest counties with highest/lowest unemployment?
 * Counties sorted by labor force
+
