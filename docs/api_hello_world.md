@@ -16,19 +16,19 @@ The plumbing -- how the API goes about accessing data, and where that data is st
 
 There are many tools and strategies for creating web APIs, and one of the easiest options these days is the use of functions in the cloud. 
 
-These are precisely what they sound like -- typically a function, written in a language such as Python, that respond to web requests and return data.
+When a cloud function receives a request -- perhaps with some URL paramters -- it then processes that request and returns a web page, JSON, or some other type of response.
 
 A variety of cloud platforms such as [Amazon Web Services](https://aws.amazon.com) and [Google Cloud Platform (GCP)](https://cloud.google.com/) provide cloud functions.
 
-For this tutorial, we'll use  GCP [Cloud Functions](https://cloud.google.com/functions), but just be aware that others offer similar functionality (e.g. AWS [Lambdas](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)).
+For this tutorial, we'll use  GCP [Cloud Functions](https://cloud.google.com/functions), but just be aware that a variety of companies offer similar functionality (e.g. AWS [Lambdas](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)).
 
 Before we get to the fancy stuff, we'll start by simply creating a basic API to get a feel for Google Cloud Functions.
 
-We'll then move on to a more sophisticated API that can be used in our data visualization app.
+We'll then move on to a more sophisticated API tailored for our data visualization app.
 
 ## Cloud Functions - hello world
 
-GCP provides the ability to easily create an API ["endpoint"](https://en.wikipedia.org/wiki/Web_API#Endpoints) using basic Python code (or Node.js or a variety of other languages).
+GCP provides the ability to easily create an API ["endpoint"](https://en.wikipedia.org/wiki/Web_API#Endpoints) using basic Python code (or Node.js, or a variety of other languages).
 
 How do we create APIs using Google Cloud Functions?
 
