@@ -1,6 +1,16 @@
-## Setup
+# Setup
 
-Initial setup, per [these docs](https://cloud.google.com/functions/docs/console-quickstart)
+## Get the code
+
+Clone this repository:
+
+```bash
+git clone git@github.com:zstumgoren/bls-api.git
+```
+
+## Set up Google Cloud Platform
+
+> Below steps are based on [these docs](https://cloud.google.com/functions/docs/console-quickstart)
 
 * Create Google Cloud Platform account
 * Create a Google Cloud Project called `bls-data-viz-YOUR_NAME>`, substituting your first name where it says `YOUR_NAME`. If you get an error saying the name is already taken, try adding your family name as well.
