@@ -2,9 +2,9 @@
 
 So you've completed the [hello world API call](api_hello_world.md) and loaded BLS data into [BigQuery](bigquery.md).
 
-We're now ready to create a Cloud Function that can dynamically query BigQuery when supplied with an arbitrary county name and state.
+We're now ready to create a Cloud Function that can dynamically query BigQuery when supplied with the name of a `county` and `state`.
 
-This will provide the ability for us to create a Vega-Lite chart that allows users to choose the county they'd like to see visualized.
+This API will power a Vega-Lite chart that allows users to choose a county to view it's unemployment rate for the last 14 months.
 
 ## Hello BLS API
 
@@ -44,13 +44,13 @@ Notice that you are currently editing the `main.py` file in the code editor.
 
 But there's also a `requirements.txt` file, where you can add additional software for your Python program.
 
-In order for our API to query the BLS data over on BigQuery, we'll need to add a new library. We'll also include a web framework called Flask and a library called `werkzeug` that will help us deal with some headaches related to requesting data from an API.
+In order for our API to query the BLS data over on BigQuery, we'll need to add a new library. We'll also include a web framework called `Flask` and a library called `Werkzeug` that will help us deal with some headaches related to creating an API and working with requests to the API.
 
 Click on `requirements.txt` and add the libraries, each on a separate line: 
 
 - `google-cloud-bigquery`
-- `flask`
-- `werkzeug`
+- `Flask`
+- `Werkzeug`
 
 The file should now look like this:
 
@@ -64,10 +64,9 @@ Next, replace the contents of `main.py` with the following code and then click `
 
 > We'll walk through each line of this code together.
 
-```python
-import functions_framework
+```python 
 
-from flask import jsonify, make_response
+from flask import jsonify, make_respsdonse
 from google.cloud import bigquery
 from werkzeug.datastructures import Headers
 
