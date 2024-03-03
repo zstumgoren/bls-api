@@ -8,3 +8,4 @@ The tutorial will walk you through the process of creating a Vega-Lite chart tha
 - [API - Hello World](docs/api_hello_world.md)
 - [BLS data and GCP BigQuery](docs/bigquery.md)
 - [API - BLA County Data](docs/api_bls.md)
+- [Exercises](docs/exercises.md) - Add some pizzaz to the viz
