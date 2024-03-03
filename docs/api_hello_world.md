@@ -8,7 +8,7 @@ API is an acronym for Application Programming Interface. In general terms, it's 
 
 The goal is to make life easier for those using the API -- i.e. the "callers".
 
-In a web context, APIs often take the form of a web application that support flexible access to data based on a set of specifications.
+In a web context, APIs often take the form of a web application that provides flexible access to data based on a set of specifications.
 
 For example, if we wanted to create a web app that allows users to look up unemployment data by county and state, it would make sense to create an underlying API that accepts `county` and `state` parameters. And in our web application, users might submit `county` and `state` to our API using a standard [web form](https://en.wikipedia.org/wiki/HTML_form).
 

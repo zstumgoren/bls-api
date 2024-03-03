@@ -89,7 +89,7 @@ Then click `CREATE TABLE` at the bottom of the form.
 
 You should now see the `unemployment` table listed under the `bls` dataset at the left of your screen.
 
-![bigquery bls unemployment table listed](../static/img/biquery_bls_unemployment_table_list.png)
+![bigquery bls unemployment table listed](../static/img/bigquery_bls_unemployment_table_list.png)
 
 This will pop up a form that allows you to upload the BLS unemployment data. Fill out the form as show in the image below. The fields you'll need to customize are:
 
