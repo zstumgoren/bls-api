@@ -1,5 +1,9 @@
 # openapi2-functions.yaml
 swagger: '2.0'
+host: "bls-0hb1l9hf489ye.apigateway.hs-research-tumgoren.cloud.goog "
+x-google-endpoints:
+- name: "bls-0hb1l9hf489ye.apigateway.hs-research-tumgoren.cloud.goog"
+  allowCors: True
 info:
   title: BLS county-unemployment
   description: Unemployment data by county.

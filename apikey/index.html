@@ -22,9 +22,11 @@
         <div id="vis"></div>
     </div>
     <script>
-      const apiEndpoint = 'https://us-west2-hs-research-tumgoren.cloudfunctions.net/bls_cors';
+      const apiKey = "ADD_API_KEY_HERE"
+      //const apiEndpoint = 'https://us-west2-hs-research-tumgoren.cloudfunctions.net/bls_county_data';
+      const apiEndpoint = 'https://bls-api-gateway-ajnln5v1.wl.gateway.dev/county_unemployment';
       // Generate onsubmit function customized for a particular endpoint
-      const onSubmitFunc = submitSearch(apiEndpoint);
+      const onSubmitFunc = submitSearch(apiEndpoint, apiKey);
       // Assign custom function to onsubmit event
       const form = document.querySelector('#search-form');
       form.onsubmit = onSubmitFunc; 
