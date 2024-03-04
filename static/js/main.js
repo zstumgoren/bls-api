@@ -1,15 +1,16 @@
 function renderSearchResults(data) {
-    //console.log(data);
+
     const resultsDiv = document.querySelector('#search-results');
     const area = data.area;
     const vlSpec = {
-      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "description": `Unemployment rate: ${area}`,
-      "data": {"values": data.data},
-      "mark": "line",
-      "encoding": {
-        "x": {"field": "date", "type": "temporal", "timeUnit": "yearmonth"},
-        "y": {"field": "unemployed", "type": "quantitative"}      }
+      $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+      description: `Unemployment rate: ${area}`,
+      data: {values: data.data},
+      mark: "line",
+      encoding: {
+        x: {field: "date", type: "temporal", timeUnit: "yearmonth"},
+        y: {field: "unemployed", type: "quantitative"}
+      }
     };
     vegaEmbed('#vis', vlSpec);
   };
