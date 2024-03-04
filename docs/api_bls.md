@@ -128,9 +128,9 @@ Now we're ready to try using the API with Vega-Lite.
 
 To streamline things, we've provided you with a starter template for the HTML, CSS and Javascript:
 
-- `index.html`
-- `static/css/main.css`
-- `static/js/main.js`
+- [index.html](../index.html)
+- [static/css/main.css](../static/css/main.css)
+- [static/js/main.js](../static/js/main.js)
 
 Before proceeding, make sure you've cloned this repository to your machine so that you have access to those files.
 
