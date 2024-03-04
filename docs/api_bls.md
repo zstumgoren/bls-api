@@ -110,13 +110,15 @@ Once the deployment is complete, you should see a green circle with a checkmark 
 
 ![bls api default page](../static/img/func_bls_api_deployed.png)
 
-
 Now we can test the new function.
 
-First, get the `Trigger URL` and call it with the expected URL parameters. Specifically, add the following to the end of the URL: `?county=Marin County&state=CA`.
+Copy/paste the `Trigger URL` into your web browser and call it with the expected URL parameters. Specifically, add the following to the end of the URL: `?county=Marin County&state=CA`.
+
+You should see data returned that looks like below:
+
+![bls api json response](../static/img/bls_api_json.png)
 
 [python bigquery client]: https://cloud.google.com/bigquery/docs/reference/libraries#using_the_client_library
-
 
 ## Plug in the BLS API
 
@@ -124,7 +126,7 @@ So, we've crafted our API and verified that it works.
 
 Now we're ready to try using the API with Vega-Lite.
 
-To streamline things, we've provided you with a starter temnplate for the HTML, CSS and Javascript:
+To streamline things, we've provided you with a starter template for the HTML, CSS and Javascript:
 
 - `index.html`
 - `static/css/main.css`
@@ -136,7 +138,7 @@ Before proceeding, make sure you've cloned this repository to your machine so th
 git clone git@github.com:zstumgoren/bls-api.git
 ```
 
-Next, we're going to grab the "Trigger" URL for our GCP Cloud Function.
+Next, we're going to grab the Trigger URL for our GCP Cloud Function.
 
 In your web browser, navigate to your Cloud Function's dashboard and copy the URL at the top of the page.
 
@@ -166,17 +168,17 @@ The page is quite simple. Just a brief description of the chart and a web form p
 
 ![chart home page](../static/img/chart_home_page.png)
 
-Now it's time for the moment of truth. 
+Now the moment of truth. 
 
-Before we test the chart, let's first open up our Developer Tools by right-clicking and choosing `Inspect`.
+Open up our Developer Tools by right-clicking and choosing `Inspect`.
 
 Then navigate to the `Nework` tab. 
 
 This will allow us to verify that our API is being called when the web form is submitted.
 
-Ok...hit the `Submit` button and...drum roll...
+Ok...hit the `Submit` button on the form and...drum roll...
 
-Cue the sad trombone. Our API called failed and, as a result, we don't see a chart displayed.
+Cue the sad trombone. Our API call failed and, as a result, we don't see a chart displayed.
 
 The `Network` tab offers us some insight into what went wrong.
 
@@ -190,7 +192,7 @@ What the heck? Read on for the gory details...
 
 CORS is an acronym for [Cross-Origin Resource Sharing](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS), and is used to control which "origins" are allowed to access a site's resources. 
 
-It's quite common for sites to limit API access to its own HTML and Javascript files. And sure enough, Cloud Function APIs, even with the `Allow unauthenticated` option selected, will block access by third party code that doesn't originate from the same URL.
+It's quite common for a site to limit API access to its own HTML and Javascript files. And sure enough, Cloud Function APIs, even with the `Allow unauthenticated` option selected, will block access by third party code that doesn't originate from the same URL.
 
 There's a simple solution for this. We can update our API code to set certain [HTTP headers](https://developer.mozilla.org/en-US/docs/Glossary/HTTP_header) -- bits of metadata included in web requests and responses -- to allow other origins to access the endpoint.
 
@@ -230,7 +232,7 @@ def county_data(request):
           'date': f"{row['year']}-{row['month']}-01",
           'unemployed': row['unemployed_rate']
       })
-    # ADD THESE LIUNES related to Headers
+    # ADD THESE LINES related to Headers
     #  Update headers to allow CORS
     # Better would be to use flask-cors
     headers = Headers()
@@ -258,21 +260,21 @@ Click `Submit` once again, and you should see a chart such as below.
 
 ![chart with line](../static/img/chart_with_line.png)
 
-If you kept your `Network` tab open, you'll also notice that the status of our response has changed to that friendly green color for success, and a [status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) of 200.
+If you kept your `Network` tab open, you'll also notice that the status of our response has changed to that friendly green color for success, and has a [status code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) of 200.
 
 Congratulations!! You've created a fully functional data visualiziation backed by an API.
 
-## CORS settings are not about security
+## CORS settings are not for security
 
-It's important to note that it's not necessarily a great idea to allow CORS unless you're building an API intended for public consumption. By allowing origins to access your endpoint, anyone can easily access the data in your API from any "origin".
+It's important to note that it's not necessarily a great idea to allow CORS unless you're building an API intended for public consumption. By allowing all origins to access your endpoint, anyone can easily access the data in your API.
 
-CORS allows you to restrict access to a web resource by specifiying one or more domains, for example.
+CORS allows you to restrict access to a web resource by specifiying one or more domains, for example. While developing, you could limit access to `localhost`, and then once you're application is complete, update the CORS `Access-Control-Allow-Origin` header to only allow access from the domain where you're hosting your web application.
 
 But you shouldn't regard CORS as a proper safety measure. It's primarily intended to limit access in a browser context. 
 
 If you were to disable CORS in your Cloud Function, this would break the Vega-Lite chart with the same CORS error we encountered above. 
 
-But it's still possible to access the API by hitting the endpoint directly, for example by simply querying it in a browser URL bar or by using the `curl` command line tool.
+But it's still possible to access the API by hitting the endpoint directly, for example by simply querying it in a browser or by using the `curl` command line tool.
 
 ```bash
 # This still works on the version without 
@@ -292,6 +294,6 @@ You've now completed this tutorial and have a shiny new API-backed data visualiz
 
 Alas, our chart is quite simple and there are many ways to improve on this initial work.
 
-Check out these [exercises](docs/exercises.md) for some potential improvements or brainstorm and build your own ideas.
+Check out these [exercises](exercises.md) for some potential improvements or brainstorm and build your own ideas.
 
 Happy coding!!
