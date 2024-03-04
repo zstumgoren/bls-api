@@ -113,9 +113,7 @@ Once the deployment is complete, you should see a green circle with a checkmark 
 
 Now we can test the new function.
 
-First, get the `Trigger URL` and call it without any parameters. This should return our error message
-
-Next, supply the correct URL parameters, e.g.`?county=Marin County&state=CA`. The query should work this time.
+First, get the `Trigger URL` and call it with the expected URL parameters. Specifically, add the following to the end of the URL: `?county=Marin County&state=CA`.
 
 [python bigquery client]: https://cloud.google.com/bigquery/docs/reference/libraries#using_the_client_library
 
