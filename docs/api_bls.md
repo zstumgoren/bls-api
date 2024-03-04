@@ -2,9 +2,9 @@
 
 So you've completed the [hello world API call](api_hello_world.md) and loaded BLS data into [BigQuery](bigquery.md).
 
-We're now ready to create a Cloud Function that can dynamically query BigQuery when supplied with the name of a `county` and `state`.
+We're now ready to create a Cloud Function that can request data from BigQuery when supplied with the name of a `county` and `state`.
 
-This API will power a simple [Vega-Lite](https://vega.github.io/vega-lite/) line chart that allows users to choose a county to view it's unemployment rate for the last 14 months.
+This API will power a simple [Vega-Lite](https://vega.github.io/vega-lite/) line chart that allows users to choose a county to view its unemployment rate for the last 14 months.
 
 ## Hello BLS API
 
@@ -58,7 +58,7 @@ The file should now look like this:
 
 Next, click back over to `main.py`.
 
-Update the `Entry point` value to `county_data`. This is the name of the Python function that will be called when the API's URL is called.
+Update the `Entry point` value to `county_data`. This is the name of the Python function that will be invoked when the API's URL is called.
 
 Next, replace the contents of `main.py` with the following code and then click `DEPLOY` at the bottom of the page. This step will take a minute or two.
 
