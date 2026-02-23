@@ -20,13 +20,13 @@ When a cloud function receives a request -- perhaps with some URL paramters -- i
 
 A variety of cloud platforms such as [Amazon Web Services](https://aws.amazon.com) and [Google Cloud Platform (GCP)](https://cloud.google.com/) provide cloud functions.
 
-For this tutorial, we'll use  GCP [Cloud Functions](https://cloud.google.com/functions), but just be aware that a variety of companies offer similar functionality (e.g. AWS [Lambdas](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)).
+For this tutorial, we'll use  GCP [Cloud Run functions](https://cloud.google.com/functions), but just be aware that a variety of companies offer similar functionality (e.g. AWS [Lambdas](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)).
 
-Before we get to the fancy stuff, we'll start by simply creating a basic API to get a feel for Google Cloud Functions.
+Before we get to the fancy stuff, we'll start by simply creating a basic API to get a feel for Google Cloud Run functions.
 
 We'll then move on to a more sophisticated API tailored for our data visualization app.
 
-## Cloud Functions - hello world
+## Cloud Run functions - hello world
 
 GCP provides the ability to easily create an API ["endpoint"](https://en.wikipedia.org/wiki/Web_API#Endpoints) using basic Python code (or Node.js, or a variety of other languages).
 
@@ -34,39 +34,34 @@ How do we create APIs using Google Cloud Functions?
 
 **First**, make sure you've completed the steps in the [setup docs](setup.md).
 
-Then, log in to GCP and go to the Cloud Functions Dashboard.
+Then, log in to GCP and go to the Cloud Run functions Dashboard.
 
 You can locate the dashboard using the search bar at the top of the GCP Console:
 
 ![gcp console search for cloud functions](../static/img/gcp_search.png)
 
-Select `Cloud Functions` and you should be taken to the dashboard.
+Select `Cloud Run Functions` and you should be taken to the dashboard.
 
-Click `CREATE FUNCTION` at the top of the page.
+Click on `Services` on the left side.
 
-Create a `hello_world` function with the following settings:
+Then click `Write a function` at the top of the page.
 
-- Environment: `2nd gen`
-- Function name: `hello_world`
-- Region: `us-central1 (Iowa)`
-- Trigger type: `HTTPS`
-- Authentication: `Allow unauthenticated invocations`
+Update the values in the following sections as specified (leave defaults or blank if not specified):
 
-It should look like the below:
+- `Configure`
+  - Service name: `hello-world`
+  - Region: `us-central1 (Iowa)`
+  - Runtime: `Python 3.13`
+- `Authentication`
+  - Check `Allow public access`
+- `Service scaling`
+  - Maximum number of instances: `2`
+- `Ingress`
+  - Check `All`
 
-![hello world cloud function config](../static/img/hello_world_function_config.png)
+Click `Create`.
 
-Click `Next`.
-
-You should now be on the source code editor screen. You may notice the default starter code is using `node.JS`.
-
-Let's go ahead and change this to a recent version of Python (e.g. 3.11) using the `Runtime` drop-down menu.
-
-![select python runtime](../static/img/select_python_runtime.png)
-
-Once you've selected `Python 3.11`, the example code should update to our newly selected language.
-
-It provides a handy little `hello_http` function for us.
+On the subsequent screen, there should be some starter code for a very simple API request in `main.py`.
 
 ![hello http function](../static/img/hello_http.png)
 
@@ -74,14 +69,15 @@ This code may seem complex, so let's go through a few important points:
 
 - The `hello_http(request)` is the so-called `Entry point` function. This is the top-level function that will be called when a web request is made to this cloud function's URL. 
 - The `hello_http` function is [decorated](https://en.wikipedia.org/wiki/Decorator_pattern) with  `@functions_framework.http` in the line above, which imbues `hello_http` with some added functionality that allows it to run in this particular cloud environment. _For the curious, gory details are [here](https://github.com/GoogleCloudPlatform/functions-framework-python)._
-- Our cloud function is using a Python web framework called Flask, which expects a `request` argument that contains details about incoming web requests.
 - Our code is technically stored in a file called `main.py` (see area to the left of the code editor). 
 - Also note `requirements.txt`, where you can add other software libraries required by the function.
 - The code logic itself is fairly straightforward:
   - If you call the API, it will simply return the phrase `Hello World!`.
   - If you provide a `name=SomeName` parameter when calling the URL, it will pluck that parameter from the URL and substitute the name in the return message: `Hello SomeName`.
 
-Click the blue `DEPLOY` at page bottom. It'll take a minute or two to deploy, and then we can test our cloud function...
+Click `Save and redeploy`.
+
+After the site has redeployed, you can test the API by clicking the URL for your function.
 
 ## Triggering our function
 
