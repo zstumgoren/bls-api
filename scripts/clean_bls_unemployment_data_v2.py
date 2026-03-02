@@ -30,22 +30,6 @@ def main(local_path):
     reader = fastexcel.read_excel(excel_file)
     sheet = reader.load_sheet(0, header_row=2)
 
-    headers = [
-        'laus_area_code',
-        'fips_state',
-        'fips_county',
-        'area',
-        'county',
-        'state',
-        'month_name',
-        'month',
-        'year',
-        'date',
-        'civ_labor_force',
-        'employed',
-        'unemployed',
-        'unemployed_rate',
-    ]
     # Convert to Polars DataFrame for easier manipulation
     orig_df = sheet.to_polars()
     # Rename columns to match our desired output
@@ -55,13 +39,11 @@ def main(local_path):
         'County FIPS Code': 'fips_county',
         'County Name/State Abbreviation': 'county_state',
         'Period': 'period',
-        'Labor Force': 'employed',
+        'Labor Force': 'labor_force',
+        'Employed': 'employed',
         'Unemployed': 'unemployed',
         'Unemploy-ment Rate (%)': 'unemployed_rate',
     })
-    rows_with_nulls = df.filter(
-        pl.any_horizontal(pl.all().is_null())
-    )
     # Remove annotation rows at end of file (which should be only rows with null fips state/county
     df = df.filter( pl.col('fips_state').is_not_null())
     df_new_cols = df.with_columns([
@@ -81,7 +63,8 @@ def main(local_path):
     ]).drop(["_parsed", "date_clean"])
     # Write data to CSV, sans index
     output_file = output_dir / "bls_county_unemployment.csv"
-    df_new_cols.write_csv(output_file, null_value='NULL')
+    #df_new_cols.write_csv(output_file, null_value='NULL', quote_style="non_numeric")
+    df_new_cols.write_csv(output_file, quote_style="non_numeric")
 
 def extract_zip(zip_path):
     # Extract to current working directory
